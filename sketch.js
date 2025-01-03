@@ -36,7 +36,7 @@ function setup() {
     flock.addBoid(b);
   }
 
-  // Daylight slider: 0 (night) to 1 (full daylight)
+ /* // Daylight slider: 0 (night) to 1 (full daylight)
   daylightSlider = createSlider(0, 1, 0.5, 0.01);
   daylightSlider.position(10, height + 10);
   createP("Daylight (0 = Sunrise, 1 = Sunset)").position(10, height + 30);
@@ -49,7 +49,73 @@ function setup() {
   // Humidity slider: 0 (dry) to 100 (very humid)
   humiditySlider = createSlider(0, 100, 50, 1);
   humiditySlider.position(10, height + 130);
-  createP("Humidity (0 = Humid, 100 = Dry)").position(10, height + 150);
+  createP("Humidity (0 = Humid, 100 = Dry)").position(10, height + 150); */
+
+   // Daylight slider with heading and legends
+  createP("DAYLIGHT").position(10, height + 5)
+    .style('font-weight', 'bold')
+    .style('margin', '0')
+    .style('font-family', 'Arial, sans-serif');
+  daylightSlider = createSlider(0, 1, 0.5, 0.01);
+  daylightSlider.position(10, height + 30);
+  // Create legends container for daylight
+  let daylightLegends = createDiv('');
+  daylightLegends.position(10, height + 35);
+  daylightLegends.style('width', '200px'); // Match slider width
+  daylightLegends.style('display', 'flex');
+  daylightLegends.style('justify-content', 'space-between');
+  daylightLegends.style('font-family', 'Arial, sans-serif');
+  daylightLegends.style('font-size', '12px');
+  createSpan('Sunrise').parent(daylightLegends);
+  createSpan('Sunset').parent(daylightLegends);
+
+  // Sky condition slider with heading and legends
+  createP("SKY CONDITION").position(10, height + 65)
+    .style('font-weight', 'bold')
+    .style('margin', '0')
+    .style('font-family', 'Arial, sans-serif');
+  skyConditionSlider = createSlider(0, 1, 0.5, 0.01);
+  skyConditionSlider.position(10, height + 90);
+  // Create legends container for sky condition
+  let skyLegends = createDiv('');
+  skyLegends.position(10, height + 95);
+  skyLegends.style('width', '200px');
+  skyLegends.style('display', 'flex');
+  skyLegends.style('justify-content', 'space-between');
+  skyLegends.style('font-family', 'Arial, sans-serif');
+  skyLegends.style('font-size', '12px');
+  createSpan('Rainy').parent(skyLegends);
+  createSpan('Clear').parent(skyLegends);
+
+  // Humidity slider with heading and legends
+  createP("HUMIDITY").position(10, height + 125)
+    .style('font-weight', 'bold')
+    .style('margin', '0')
+    .style('font-family', 'Arial, sans-serif');
+  humiditySlider = createSlider(0, 100, 50, 1);
+  humiditySlider.position(10, height + 150);
+  // Create legends container for humidity
+  let humidityLegends = createDiv('');
+  humidityLegends.position(10, height + 155);
+  humidityLegends.style('width', '200px');
+  humidityLegends.style('display', 'flex');
+  humidityLegends.style('justify-content', 'space-between');
+  humidityLegends.style('font-family', 'Arial, sans-serif');
+  humidityLegends.style('font-size', '12px');
+  createSpan('Humid').parent(humidityLegends);
+  createSpan('Dry').parent(humidityLegends);
+
+  // Update download button position to account for new spacing
+  downloadButton = createButton('Download Pattern');
+  downloadButton.position(10, height + 190);
+  downloadButton.mousePressed(downloadCanvas);
+  downloadButton.style('background-color', 'black');
+  downloadButton.style('color', 'white');
+  downloadButton.style('border', 'none');
+  downloadButton.style('padding', '10px 20px');
+  downloadButton.style('border-radius', '5px');
+  downloadButton.style('cursor', 'pointer');
+  downloadButton.style('font-family', 'Arial, sans-serif');
 
   murmurationSound.loop(); // Start the murmuration sound
 }
