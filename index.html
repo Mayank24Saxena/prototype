@@ -23,7 +23,7 @@
 
       #controls-container {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between; /* Controls are spread across horizontally */
         padding: 20px;
         background: #f5f5f5;
         border-top: 1px solid #ddd;
@@ -48,7 +48,8 @@
         border: 1px solid #ddd;
         border-radius: 4px;
         font-family: Arial, sans-serif;
-        width: 80%;
+        width: 100%;
+        margin-top: 5px; /* Small gap for clarity */
       }
 
       .slider-labels {
@@ -117,19 +118,22 @@
   </head>
   <body>
     <div id="canvas-container">
-      <!-- The animation will go here -->
+      <!-- Animation area -->
     </div>
     <div id="controls-container">
+      <!-- First Control: Daylight -->
       <div class="control">
         <p>Daylight</p>
         <input type="range" id="daylight-slider" min="0" max="1" step="0.01" value="0.5">
         <input type="date" id="daylight-date" max="2024-01-03">
       </div>
+      <!-- Second Control: Sky Condition -->
       <div class="control">
         <p>Sky Condition</p>
         <input type="range" id="sky-condition-slider" min="0" max="1" step="0.01" value="0.5">
         <input type="text" id="sky-condition-input" placeholder="Enter condition">
       </div>
+      <!-- Third Control: Humidity -->
       <div class="control">
         <p>Humidity</p>
         <input type="range" id="humidity-slider" min="0" max="100" step="1" value="50">
