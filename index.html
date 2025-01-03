@@ -24,7 +24,7 @@
       #controls-container {
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 20px;
         padding: 20px;
         background: #f5f5f5;
         border-top: 1px solid #ddd;
@@ -33,6 +33,7 @@
       .control-row {
         display: flex;
         align-items: center;
+        justify-content: space-between;
         gap: 10px; /* Space between slider and input */
       }
 
@@ -40,6 +41,7 @@
         margin: 0;
         font-size: 14px;
         color: #333;
+        flex: 1;
       }
 
       input[type="range"], input[type="date"], input[type="text"] {
@@ -153,3 +155,4 @@
     <script src="sketch.js"></script>
   </body>
 </html>
+
