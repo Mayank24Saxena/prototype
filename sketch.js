@@ -92,10 +92,10 @@ function setup() {
   createSpan('Humid').parent(humidityLegends);
   createSpan('Dry').parent(humidityLegends);
 
-  // Right side form container
+  // Right side form container - moved to rightmost end
   let rightControls = createDiv('');
-  rightControls.position(width - 310, height + 10);
-  rightControls.style('width', '300px');
+  rightControls.position(width - 220, height + 10); // Moved further right
+  rightControls.style('width', '200px'); // Made container narrower
   rightControls.style('font-family', 'Arial, sans-serif');
 
   // Date of birth input
@@ -104,20 +104,28 @@ function setup() {
     .style('margin', '0');
   let dobInput = createInput('', 'date');
   dobInput.parent(rightControls);
-  dobInput.style('width', '200px');
+  dobInput.style('width', '100%'); // Full width of container
   dobInput.style('margin', '5px 0');
   dobInput.style('padding', '5px');
+  dobInput.style('box-sizing', 'border-box');
 
-  // Time of day input
+  // Time of day dropdown
   createP("TIME OF THE DAY").parent(rightControls)
     .style('font-weight', 'bold')
     .style('margin', '10px 0 0 0');
-  let timeInput = createInput('', 'time');
-  timeInput.parent(rightControls);
-  timeInput.style('width', '200px');
-  timeInput.style('margin', '5px 0');
-  timeInput.style('padding', '5px');
-
+  let timeSelect = createSelect();
+  timeSelect.parent(rightControls);
+  timeSelect.style('width', '100%'); // Full width of container
+  timeSelect.style('margin', '5px 0');
+  timeSelect.style('padding', '5px');
+  timeSelect.style('box-sizing', 'border-box');
+  
+  // Add options to dropdown
+  timeSelect.option('Morning');
+  timeSelect.option('Afternoon');
+  timeSelect.option('Evening');
+  timeSelect.option('Night');
+  
   // Generate button
   let generateButton = createButton('Generate');
   generateButton.parent(rightControls);
@@ -128,6 +136,7 @@ function setup() {
   generateButton.style('border-radius', '5px');
   generateButton.style('cursor', 'pointer');
   generateButton.style('margin-top', '15px');
+  generateButton.style('width', '100%'); // Full width of container
   generateButton.mousePressed(downloadPattern);
 
   murmurationSound.loop();
