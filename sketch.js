@@ -25,43 +25,32 @@ function preload() {
 
 function setup() {
   createCanvas(1200, 600);
-  loadWeatherData(); // Fetch initial weather data
-  setInterval(loadWeatherData, 10000); // Update every 30 seconds
+  loadWeatherData();
+  setInterval(loadWeatherData, 10000);
 
   flock = new Flock();
-
-  // Add an initial set of boids into the system (morning = 500 boids)
+  
+  // Add initial boids
   for (let i = 0; i < 2000; i++) {
     let b = new Boid(width / 2 + random(-50, 50), height / 2 + random(-50, 50));
     flock.addBoid(b);
   }
 
- /* // Daylight slider: 0 (night) to 1 (full daylight)
-  daylightSlider = createSlider(0, 1, 0.5, 0.01);
-  daylightSlider.position(10, height + 10);
-  createP("Daylight (0 = Sunrise, 1 = Sunset)").position(10, height + 30);
+  // Left side controls container
+  let leftControls = createDiv('');
+  leftControls.position(10, height + 10);
+  leftControls.style('width', '400px');
 
-  // Sky condition slider: 0 (rainy) to 1 (clear skies)
-  skyConditionSlider = createSlider(0, 1, 0.5, 0.01);
-  skyConditionSlider.position(10, height + 70);
-  createP("Sky Condition (0 = Rainy Weather, 1 = Clear Weather)").position(10, height + 90);
-
-  // Humidity slider: 0 (dry) to 100 (very humid)
-  humiditySlider = createSlider(0, 100, 50, 1);
-  humiditySlider.position(10, height + 130);
-  createP("Humidity (0 = Humid, 100 = Dry)").position(10, height + 150); */
-
-   // Daylight slider with heading and legends
-  createP("DAYLIGHT").position(10, height + 5)
+  // Daylight slider with heading and legends
+  createP("DAYLIGHT").parent(leftControls)
     .style('font-weight', 'bold')
     .style('margin', '0')
     .style('font-family', 'Arial, sans-serif');
   daylightSlider = createSlider(0, 1, 0.5, 0.01);
-  daylightSlider.position(10, height + 30);
-  // Create legends container for daylight
+  daylightSlider.parent(leftControls);
   let daylightLegends = createDiv('');
-  daylightLegends.position(10, height + 35);
-  daylightLegends.style('width', '200px'); // Match slider width
+  daylightLegends.parent(leftControls);
+  daylightLegends.style('width', '200px');
   daylightLegends.style('display', 'flex');
   daylightLegends.style('justify-content', 'space-between');
   daylightLegends.style('font-family', 'Arial, sans-serif');
@@ -70,15 +59,14 @@ function setup() {
   createSpan('Sunset').parent(daylightLegends);
 
   // Sky condition slider with heading and legends
-  createP("SKY CONDITION").position(10, height + 65)
+  createP("SKY CONDITION").parent(leftControls)
     .style('font-weight', 'bold')
-    .style('margin', '0')
+    .style('margin', '10px 0 0 0')
     .style('font-family', 'Arial, sans-serif');
   skyConditionSlider = createSlider(0, 1, 0.5, 0.01);
-  skyConditionSlider.position(10, height + 90);
-  // Create legends container for sky condition
+  skyConditionSlider.parent(leftControls);
   let skyLegends = createDiv('');
-  skyLegends.position(10, height + 95);
+  skyLegends.parent(leftControls);
   skyLegends.style('width', '200px');
   skyLegends.style('display', 'flex');
   skyLegends.style('justify-content', 'space-between');
@@ -88,15 +76,14 @@ function setup() {
   createSpan('Clear').parent(skyLegends);
 
   // Humidity slider with heading and legends
-  createP("HUMIDITY").position(10, height + 125)
+  createP("HUMIDITY").parent(leftControls)
     .style('font-weight', 'bold')
-    .style('margin', '0')
+    .style('margin', '10px 0 0 0')
     .style('font-family', 'Arial, sans-serif');
   humiditySlider = createSlider(0, 100, 50, 1);
-  humiditySlider.position(10, height + 150);
-  // Create legends container for humidity
+  humiditySlider.parent(leftControls);
   let humidityLegends = createDiv('');
-  humidityLegends.position(10, height + 155);
+  humidityLegends.parent(leftControls);
   humidityLegends.style('width', '200px');
   humidityLegends.style('display', 'flex');
   humidityLegends.style('justify-content', 'space-between');
@@ -105,19 +92,51 @@ function setup() {
   createSpan('Humid').parent(humidityLegends);
   createSpan('Dry').parent(humidityLegends);
 
-  // Update download button position to account for new spacing
-  downloadButton = createButton('Download Pattern');
-  downloadButton.position(10, height + 190);
-  downloadButton.mousePressed(downloadCanvas);
-  downloadButton.style('background-color', 'black');
-  downloadButton.style('color', 'white');
-  downloadButton.style('border', 'none');
-  downloadButton.style('padding', '10px 20px');
-  downloadButton.style('border-radius', '5px');
-  downloadButton.style('cursor', 'pointer');
-  downloadButton.style('font-family', 'Arial, sans-serif');
+  // Right side form container
+  let rightControls = createDiv('');
+  rightControls.position(width - 310, height + 10);
+  rightControls.style('width', '300px');
+  rightControls.style('font-family', 'Arial, sans-serif');
 
-  murmurationSound.loop(); // Start the murmuration sound
+  // Date of birth input
+  createP("DATE OF BIRTH").parent(rightControls)
+    .style('font-weight', 'bold')
+    .style('margin', '0');
+  let dobInput = createInput('', 'date');
+  dobInput.parent(rightControls);
+  dobInput.style('width', '200px');
+  dobInput.style('margin', '5px 0');
+  dobInput.style('padding', '5px');
+
+  // Time of day input
+  createP("TIME OF THE DAY").parent(rightControls)
+    .style('font-weight', 'bold')
+    .style('margin', '10px 0 0 0');
+  let timeInput = createInput('', 'time');
+  timeInput.parent(rightControls);
+  timeInput.style('width', '200px');
+  timeInput.style('margin', '5px 0');
+  timeInput.style('padding', '5px');
+
+  // Generate button
+  let generateButton = createButton('Generate');
+  generateButton.parent(rightControls);
+  generateButton.style('background-color', 'black');
+  generateButton.style('color', 'white');
+  generateButton.style('border', 'none');
+  generateButton.style('padding', '10px 20px');
+  generateButton.style('border-radius', '5px');
+  generateButton.style('cursor', 'pointer');
+  generateButton.style('margin-top', '15px');
+  generateButton.mousePressed(downloadPattern);
+
+  murmurationSound.loop();
+}
+
+// Function to download the pattern
+function downloadPattern() {
+  let timestamp = year() + nf(month(), 2) + nf(day(), 2) + '-' + nf(hour(), 2) + nf(minute(), 2) + nf(second(), 2);
+  saveCanvas('murmuration-' + timestamp, 'png');
 }
 
 function draw() {
