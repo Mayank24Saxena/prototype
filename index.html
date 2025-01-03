@@ -13,17 +13,20 @@
         flex-direction: column;
       }
 
+      /* Animation area at the top */
       #canvas-container {
         flex-grow: 1;
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 20px;
+        background: #e0e0e0; /* Optional: background color for canvas area */
       }
 
+      /* Controls section at the bottom, arranged in a single row */
       #controls-container {
-        display: flex; /* Flexbox to make them align horizontally */
-        justify-content: space-between; /* Distribute space between the controls */
+        display: flex; /* Flexbox for horizontal layout */
+        justify-content: space-between; /* Space out the controls evenly */
         padding: 20px;
         background: #f5f5f5;
         border-top: 1px solid #ddd;
@@ -31,10 +34,10 @@
 
       .control {
         display: flex;
-        flex-direction: row; /* Ensuring controls are in a row (slider + input side by side) */
+        flex-direction: row; /* Align slider and input horizontally */
         align-items: center; /* Vertically align items */
         gap: 10px; /* Gap between slider and input */
-        width: 30%; /* Adjust width to fit 3 controls in 1 row */
+        width: 30%; /* Ensure three controls fit in one row */
       }
 
       .control p {
@@ -117,9 +120,12 @@
     </style>
   </head>
   <body>
+    <!-- Animation area at the top -->
     <div id="canvas-container">
-      <!-- Animation area -->
+      <!-- Animation content will go here -->
     </div>
+
+    <!-- Controls section at the bottom -->
     <div id="controls-container">
       <!-- First Control: Daylight -->
       <div class="control">
@@ -140,6 +146,8 @@
         <input type="text" id="humidity-input" placeholder="Enter humidity">
       </div>
     </div>
+
+    <!-- Birth Flock input section -->
     <h2 class="flock-heading">See Your Birth Flock</h2>
     <div id="input-container">
       <div class="input-group">
@@ -155,6 +163,7 @@
         <button id="download-btn">Generate</button>
       </div>
     </div>
+
     <script src="sketch.js"></script>
   </body>
 </html>
