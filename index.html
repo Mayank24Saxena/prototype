@@ -23,25 +23,24 @@
 
       #controls-container {
         display: flex;
-        flex-direction: column;
-        gap: 20px;
+        justify-content: space-between;
         padding: 20px;
         background: #f5f5f5;
         border-top: 1px solid #ddd;
       }
 
-      .control-row {
+      .control {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px; /* Space between slider and input */
+        flex-direction: column;
+        gap: 10px;
+        width: 30%;
+        text-align: center;
       }
 
-      .control-row p {
+      .control p {
         margin: 0;
         font-size: 14px;
         color: #333;
-        flex: 1;
       }
 
       input[type="range"], input[type="date"], input[type="text"] {
@@ -49,7 +48,7 @@
         border: 1px solid #ddd;
         border-radius: 4px;
         font-family: Arial, sans-serif;
-        flex: 2;
+        width: 100%;
       }
 
       .slider-labels {
@@ -121,17 +120,17 @@
       <!-- The animation will go here -->
     </div>
     <div id="controls-container">
-      <div class="control-row">
+      <div class="control">
         <p>Daylight</p>
         <input type="range" id="daylight-slider" min="0" max="1" step="0.01" value="0.5">
         <input type="date" id="daylight-date" max="2024-01-03">
       </div>
-      <div class="control-row">
+      <div class="control">
         <p>Sky Condition</p>
         <input type="range" id="sky-condition-slider" min="0" max="1" step="0.01" value="0.5">
         <input type="text" id="sky-condition-input" placeholder="Enter condition">
       </div>
-      <div class="control-row">
+      <div class="control">
         <p>Humidity</p>
         <input type="range" id="humidity-slider" min="0" max="100" step="1" value="50">
         <input type="text" id="humidity-input" placeholder="Enter humidity">
@@ -155,4 +154,3 @@
     <script src="sketch.js"></script>
   </body>
 </html>
-
