@@ -94,7 +94,7 @@ function setup() {
 
    // Right side form container - aligned to rightmost edge
   let rightControls = createDiv('');
-  rightControls.position(windowWidth - 200, windowHeight + 10); // Position exactly at canvas width minus container width
+  rightControls.position(450, height + 10); // Position exactly at canvas width minus container width
   rightControls.style('width', '200px');
   rightControls.style('font-family', 'Arial, sans-serif');
   rightControls.style('padding-right', '0'); // Ensure no padding on right side
